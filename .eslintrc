@@ -1,0 +1,14 @@
+{
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+	  "quotes": [2, "double"],
+	  "allowTemplateLiterals": true,
+	  "camelcase": 2,
+	  "valid-typeof": 2,
+	  "no-unused-expressions": 1,
+	  "no-unused-vars": 1,
+	  "object-curly-spacing": 0,
+	  "no-invalid-this": 2
+	}
+  }

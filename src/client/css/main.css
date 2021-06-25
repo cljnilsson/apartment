@@ -1,0 +1,129 @@
+body, html {
+	font-family: 'Oswald', sans-serif !important;
+	width: 100%;
+}
+
+#formbg {
+	background-image: url("/hero-3.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center; 
+}
+
+ul {
+    list-style: none;
+}
+
+footer {
+	background-color: #343a40;
+	color: white;
+}
+
+hr {
+	border-color: white;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+form {
+	background-color: rgba(112, 138, 143, .8);
+}
+
+button {
+	min-width: 100px;
+}
+
+.slick-slide div { text-align: center; }
+.slick-slide img { margin: auto; }
+.slick-prev:before {
+	color: saddlebrown !important;
+}
+.slick-next:before {
+	color: saddlebrown !important;
+}
+
+.pb-6, .py-6 {
+    padding-bottom: 4.355rem!important;
+}
+
+.pt-6, .py-6 {
+    padding-top: 4.355rem!important;
+}
+
+.row {
+	width: 100%;
+	margin: auto;
+}
+
+.apartmentpreview {
+	width: 250px;
+	height: 200px;
+}
+
+.apartmentImage {
+	width: 100%;
+	height: 35rem;
+}
+
+.breadcrumb {
+	background-color: #343a40;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.switch-wrapper {
+	position: relative;
+}
+  
+.switch-wrapper > div {
+	position: absolute;
+	width: 100%;
+}
+
+.input-group-append button {
+	border-radius: 0;
+}
+
+.scroll {
+	overflow-y: scroll;
+}
+  
+.input {
+	position: absolute;
+	top: 20px;
+	right: 50px;
+	box-sizing: border-box;
+	width: 0px;
+	height: 63px;
+	padding: 0 20px;
+	outline: none;
+	font-size: 18px;
+	border-radius: 50px;
+	color: #29313a;
+	border: 3px solid #343a40;
+	transition: all 0.8s ease;
+}
+
+::-webkit-input-placeholder {
+	/* Chrome/Opera/Safari */
+	color: #343a40;
+}
+::-moz-placeholder {
+	/* Firefox 19+ */
+	color: #343a40;
+}
+:-ms-input-placeholder {
+	/* IE 10+ */
+	color: #343a40;
+}
+:-moz-placeholder {
+	/* Firefox 18- */
+	color: #343a40;
+}
+
+
+#contactform {
+	background-color: white;
+}
