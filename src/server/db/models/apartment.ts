@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import Image from "./image";
+import Tag from "./tag";
 
 @Entity()
 class Apartment extends BaseEntity {
@@ -17,6 +18,9 @@ class Apartment extends BaseEntity {
 
     @OneToMany(() => Image, image => image.parent, {eager: true})
     images: Image[];
+
+    @OneToMany(() => Tag, t => t.parent, {eager: true})
+    tags: Tag[];
 
     // information
 

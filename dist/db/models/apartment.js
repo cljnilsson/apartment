@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const image_1 = __importDefault(require("./image"));
+const tag_1 = __importDefault(require("./tag"));
 let Apartment = class Apartment extends typeorm_1.BaseEntity {
 };
 __decorate([
@@ -32,6 +33,10 @@ __decorate([
     typeorm_1.OneToMany(() => image_1.default, image => image.parent, { eager: true }),
     __metadata("design:type", Array)
 ], Apartment.prototype, "images", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => tag_1.default, t => t.parent, { eager: true }),
+    __metadata("design:type", Array)
+], Apartment.prototype, "tags", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)

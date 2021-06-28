@@ -55,7 +55,13 @@ app.post("/search", async (req, res) => {
 	if(!req.body.rooms) delete filter.rooms
 
 	res.json(await DB.getWhere(Apartment, filter));
-})
+});
+
+app.post("/createadvertisement", async (req, res) => {
+	console.log(req.body);
+
+	res.json(req.body);
+});
 
 // Lazy solution to always attempt to render the site
 app.get("*", (req, res) => {

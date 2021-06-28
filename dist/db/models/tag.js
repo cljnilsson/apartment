@@ -14,21 +14,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const apartment_1 = __importDefault(require("./apartment"));
-let Image = class Image extends typeorm_1.BaseEntity {
+let Tag = class Tag extends typeorm_1.BaseEntity {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", Number)
-], Image.prototype, "id", void 0);
+], Tag.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 100, default: "Error" }),
+    typeorm_1.Column({ length: 50, default: "" }),
     __metadata("design:type", String)
-], Image.prototype, "path", void 0);
+], Tag.prototype, "name", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => apartment_1.default, apartment => apartment.images),
+    typeorm_1.ManyToOne(() => apartment_1.default, apartment => apartment.tags),
     __metadata("design:type", apartment_1.default)
-], Image.prototype, "parent", void 0);
-Image = __decorate([
+], Tag.prototype, "parent", void 0);
+Tag = __decorate([
     typeorm_1.Entity()
-], Image);
-exports.default = Image;
+], Tag);
+exports.default = Tag;

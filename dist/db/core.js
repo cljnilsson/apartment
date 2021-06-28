@@ -8,11 +8,18 @@ const dbsubscriber_1 = __importDefault(require("./dbsubscriber"));
 class DB extends dbsubscriber_1.default {
     static async create(c, o) {
         let q = new c();
-        for (const [key, value] of Object.entries(o)) {
-            q[key] = value;
+        try {
+            for (const [key, value] of Object.entries(o)) {
+                q[key] = value;
+            }
+            await this.save(q);
         }
-        await this.save(q);
-        return q;
+        catch (err) {
+            console.error(err);
+        }
+        finally {
+            return q;
+        }
     }
     static async get(c) {
         let repo = this.connection.getRepository(c);

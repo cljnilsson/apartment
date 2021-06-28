@@ -41,6 +41,10 @@ server_1.default.post("/search", async (req, res) => {
         delete filter.rooms;
     res.json(await core_1.default.getWhere(apartment_1.default, filter));
 });
+server_1.default.post("/createadvertisement", async (req, res) => {
+    console.log(req.body);
+    res.json(req.body);
+});
 server_1.default.get("*", (req, res) => {
     res.sendfile("./dist/public/index.html");
 });

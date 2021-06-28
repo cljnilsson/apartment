@@ -2,16 +2,16 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, OneToOne,
 import Apartment from "./apartment";
 
 @Entity()
-class Image extends BaseEntity {
+class Tag extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({length: 100, default: "Error"})
-    path: string;
+    @Column({length: 50, default: ""})
+    name: string;
 	
-	@ManyToOne(() => Apartment, apartment => apartment.images)
+	@ManyToOne(() => Apartment, apartment => apartment.tags)
 	parent: Apartment;
 }
 
-export default Image;
+export default Tag;

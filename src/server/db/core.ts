@@ -23,13 +23,20 @@ class DB extends DBSubscriber {
 		return q;
 	}*/
 
-	static async create(c : Class, o : Object) {
+	static async create(c: Class, o : Object) {
 		let q = new c();
-		for(const [key, value] of Object.entries(o)) {
-			q[key] = value;
+		try {
+			for(const [key, value] of Object.entries(o)) {
+				q[key] = value;
+			}
+			await this.save(q);
 		}
-		await this.save(q);
-		return q;
+		catch(err) {
+			console.error(err);
+		}
+		finally {
+			return q;
+		}
 	}
 
 	static async get(c: Class) {
