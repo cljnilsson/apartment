@@ -64,8 +64,11 @@ function Advertisement() {
 							<option>SOuthern Bishkek</option>
 						</select>
 					</div>
-					<div className="form-group col-md-4">
-						<input type="text" className="form-control" placeholder="ROOMS" name="rooms" required />
+					<div className="form-group col-md-2">
+						<input type="text" className="form-control" placeholder="Rooms" name="rooms" required />
+					</div>
+					<div className="form-group col-md-2">
+						<input type="text" className="form-control" placeholder="Floor" name="floor"/>
 					</div>
 				</div>
 				<div className="form-row align-items-end">
@@ -77,6 +80,15 @@ function Advertisement() {
 					</div>
 					<div className="form-group col-md-2">
 						<input type="number" className="form-control" placeholder="Area (Sqft)" name="area" required />
+					</div>
+				</div>
+				<div className="form-row align-items-end">
+					<div className="form-group col-md-8"></div>
+					<div className="form-group col-md-2">
+						<input type="text" className="form-control" placeholder="Bathroom(s)" name="bathroom" required/>
+					</div>
+					<div className="form-group col-md-2">
+						<input type="number" className="form-control" placeholder="Bedroom(s)" name="bedroom" required />
 					</div>
 				</div>
 				<div className="formSecondary p-3">
@@ -98,7 +110,7 @@ function Advertisement() {
 				</div>
 				<div className="form-row align-items-end my-3">
 					<label>Image(s)</label>
-					<input type="file" className="form-control-file" multiple />
+					<input type="file" className="form-control-file" multiple name="imgs" />
 					<small className="form-text">You can hold down CTRL or SHIFT to select multiple images.</small>
 				</div>
 				<div className="form-row align-items-end">

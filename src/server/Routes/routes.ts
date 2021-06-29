@@ -3,6 +3,8 @@ import "../db/generate";
 import {MoreThanOrEqual, LessThanOrEqual, Between, Like, In, FindOperator} from "typeorm";
 
 import Apartment from "../db/models/apartment";
+import Image from "../db/models/image";
+import Tag from "../db/models/tag";
 
 import app from "../server";
 
@@ -57,9 +59,71 @@ app.post("/search", async (req, res) => {
 	res.json(await DB.getWhere(Apartment, filter));
 });
 
+interface iAd {
+    title: string;
+	description: string;
+    buildingtype: string;
+	area: string;
+
+	bedroom: string,
+	bathroom: string,
+	rooms: string;
+
+	floor?: string,
+	price: string;
+	size: string;
+}
+
 app.post("/createadvertisement", async (req, res) => {
 	console.log(req.body);
 
+	let data : iAd = {
+		title: req.body.title,
+		description: req.body.ad,
+		buildingtype: req.body.propertytype,
+		area: req.body.location,
+
+		bedroom: req.body.bedroom,
+		bathroom: req.body.bathroom,
+		rooms: req.body.rooms,
+
+		floor: req.body.floor ? req.body.floor : "",
+
+		price: req.body.price,
+		size: req.body.area
+	};
+
+	let a = await DB.create(Apartment, data);
+
+	if(req.body.mountainview)
+		DB.create(Tag, {name: "Mountain View"				, parent: a});
+
+	if(req.body.communalservicesincluded)
+		DB.create(Tag, {name: "Communal Services Included"	, parent: a});
+
+	if(req.body.animalsallowed)
+		DB.create(Tag, {name: "Animals Allowed"				, parent: a});
+
+	if(req.body.nearbypark)
+		DB.create(Tag, {name: "Nearby Parks"				, parent: a});
+
+	if(req.body.balcony)
+		DB.create(Tag, {name: "Balcony"						, parent: a});
+
+	if(req.body.centralheating)
+		DB.create(Tag, {name: "Central Heating"				, parent: a});
+
+	if(req.body.lowfloors)
+		DB.create(Tag, {name: "Low Floors"					, parent: a});	
+
+	if(req.body.highfloors)
+		DB.create(Tag, {name: "High Floors"					, parent: a});	
+
+	if(req.body.brandnew)
+		DB.create(Tag, {name: "Brand New"					, parent: a});	
+
+	DB.create(Image, {parent: a, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/241/241486183.jpg"}); // TODO proper image upload
+	
 	res.json(req.body);
 });
 

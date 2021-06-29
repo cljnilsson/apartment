@@ -46,9 +46,6 @@ class Apartment extends BaseEntity {
     floor: number;
 
     @Column()
-    maxfloor: number;
-
-    @Column()
     size: number;
 
     @CreateDateColumn()

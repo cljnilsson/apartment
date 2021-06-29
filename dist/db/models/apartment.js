@@ -68,10 +68,6 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", Number)
-], Apartment.prototype, "maxfloor", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", Number)
 ], Apartment.prototype, "size", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),

@@ -45,7 +45,6 @@ async function dumpTest() {
 		bathroom: 1,
 		rooms: 5,
 		floor: 3,
-		maxfloor: 8,
 		size: 100,
 		area: "City Central",
 		buildingtype: "Apartment"

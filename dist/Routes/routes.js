@@ -7,6 +7,8 @@ const core_1 = __importDefault(require("../db/core"));
 require("../db/generate");
 const typeorm_1 = require("typeorm");
 const apartment_1 = __importDefault(require("../db/models/apartment"));
+const image_1 = __importDefault(require("../db/models/image"));
+const tag_1 = __importDefault(require("../db/models/tag"));
 const server_1 = __importDefault(require("../server"));
 server_1.default.get("/", (req, res) => {
     res.sendfile("./dist/public/index.html");
@@ -43,6 +45,38 @@ server_1.default.post("/search", async (req, res) => {
 });
 server_1.default.post("/createadvertisement", async (req, res) => {
     console.log(req.body);
+    let data = {
+        title: req.body.title,
+        description: req.body.ad,
+        buildingtype: req.body.propertytype,
+        area: req.body.location,
+        bedroom: req.body.bedroom,
+        bathroom: req.body.bathroom,
+        rooms: req.body.rooms,
+        floor: req.body.floor ? req.body.floor : "",
+        price: req.body.price,
+        size: req.body.area
+    };
+    let a = await core_1.default.create(apartment_1.default, data);
+    if (req.body.mountainview)
+        core_1.default.create(tag_1.default, { name: "Mountain View", parent: a });
+    if (req.body.communalservicesincluded)
+        core_1.default.create(tag_1.default, { name: "Communal Services Included", parent: a });
+    if (req.body.animalsallowed)
+        core_1.default.create(tag_1.default, { name: "Animals Allowed", parent: a });
+    if (req.body.nearbypark)
+        core_1.default.create(tag_1.default, { name: "Nearby Parks", parent: a });
+    if (req.body.balcony)
+        core_1.default.create(tag_1.default, { name: "Balcony", parent: a });
+    if (req.body.centralheating)
+        core_1.default.create(tag_1.default, { name: "Central Heating", parent: a });
+    if (req.body.lowfloors)
+        core_1.default.create(tag_1.default, { name: "Low Floors", parent: a });
+    if (req.body.highfloors)
+        core_1.default.create(tag_1.default, { name: "High Floors", parent: a });
+    if (req.body.brandnew)
+        core_1.default.create(tag_1.default, { name: "Brand New", parent: a });
+    core_1.default.create(image_1.default, { parent: a, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/241/241486183.jpg" });
     res.json(req.body);
 });
 server_1.default.get("*", (req, res) => {
