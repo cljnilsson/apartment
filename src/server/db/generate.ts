@@ -35,6 +35,9 @@ async function makeRandomTagForAd(listing) { // Can create duplicates but it doe
 	DB.create(Tag, {parent: listing, name: t});
 }
 
+let buildings = ["Apartment", "Penthouse", "House", "Cottage", "Office"];
+let areas = ["City Center", "Downtown"];
+
 async function dumpTest() {
 	let listing = await DB.create(Apartment, {
 		title: "some apartment",
@@ -46,8 +49,8 @@ async function dumpTest() {
 		rooms: 5,
 		floor: 3,
 		size: 100,
-		area: "City Central",
-		buildingtype: "Apartment"
+		area: areas.random(),
+		buildingtype: buildings.random()
 	});
 	
 	await DB.create(Image, {parent: listing, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/182/182567865.jpg"});

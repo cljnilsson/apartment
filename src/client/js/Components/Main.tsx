@@ -8,6 +8,7 @@ import About 			from "./about";
 import Contact 			from "./contact";
 import Advertisement 	from "./advertisement";
 import Category 		from "./category";
+import Search 			from "./search";
 import Footer 			from "./footer";
 
 import GlobalContext 	from "./Contexts/GlobalContext";
@@ -34,6 +35,7 @@ function App() {
 						<Route exact path="/about"><About/></Route>
 						<Route exact path="/contact"><Contact/></Route>
 						<Route exact path="/createadvertisement"><Advertisement/></Route>
+						<Route exact path="/search"><Search/></Route>
 					</Switch>
 				</Router>
 			</div>

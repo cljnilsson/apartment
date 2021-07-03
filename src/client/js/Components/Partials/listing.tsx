@@ -31,8 +31,7 @@ function Listing(props: iProps) {
 
 	console.log(context)
 
-	//const { status, error, data } = Get("allapartments", "/api/apartments");
-    const { status, error, data } = Get(props.cache, props.url);
+	const { status, error, data } = Get(props.cache, props.url);
 
 	if (status === "loading") {
 		context.setLoading(true);

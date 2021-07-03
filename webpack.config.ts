@@ -70,6 +70,7 @@ const config: webpack.Configuration = {
         filename: "bundle.js",
 	},
 	watch: true,
+    mode: "development",
 	stats: "minimal",
 	performance: {
 		hints: false

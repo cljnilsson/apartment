@@ -31,10 +31,10 @@ function Index() {
 		if(minPrice) params.append("minPrice", minPrice);
 		if(maxPrice) params.append("maxPrice", maxPrice);
 
-		if(minSize)params.append("minSize", minSize);
-		if(maxSize)params.append("maxSize", maxSize);
+		if(minSize) params.append("minSize", minSize);
+		if(maxSize) params.append("maxSize", maxSize);
 		
-		if(area)params.append("area", area);
+		if(area) params.append("area", area);
 
 		if(buildingType)params.append("buildingtype", buildingType);
 

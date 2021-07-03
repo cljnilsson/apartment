@@ -22,7 +22,10 @@ server_1.default.get("/api/apartments/catagory/:name", async (req, res) => {
 server_1.default.get("/api/apartments/:id", async (req, res) => {
     res.json(await core_1.default.getFirstWhere(apartment_1.default, { id: req.params.id }));
 });
-server_1.default.post("/search", async (req, res) => {
+function findCommonElements3(arr1, arr2) {
+    return arr1.some(item => arr2.includes(item));
+}
+server_1.default.post("/api/search", async (req, res) => {
     console.log(req.body);
     req.body.minPrice = req.body.minPrice || 0;
     req.body.maxPrice = req.body.maxPrice || 99999999;
@@ -41,7 +44,16 @@ server_1.default.post("/search", async (req, res) => {
         delete filter.buildingtype;
     if (!req.body.rooms)
         delete filter.rooms;
-    res.json(await core_1.default.getWhere(apartment_1.default, filter));
+    let tags = ["Brand New", "Balcony"];
+    let result = await core_1.default.getWhere(apartment_1.default, filter);
+    let filtered = [...result];
+    for (let r of result) {
+        let t = r.tags.map(v => v.name);
+        if (!findCommonElements3(tags, t)) {
+            filtered = filtered.filter(i => i !== r);
+        }
+    }
+    res.json(filtered);
 });
 server_1.default.post("/createadvertisement", async (req, res) => {
     console.log(req.body);

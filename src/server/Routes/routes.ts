@@ -32,7 +32,11 @@ interface iSearch {
     rooms?: FindOperator<number>;
 }
 
-app.post("/search", async (req, res) => {
+function findCommonElements3(arr1, arr2) {
+    return arr1.some(item => arr2.includes(item))
+}
+
+app.post("/api/search", async (req, res) => {
 	console.log(req.body);
 
 	// Remove price/size if both params are undefined?
@@ -56,7 +60,18 @@ app.post("/search", async (req, res) => {
 
 	if(!req.body.rooms) delete filter.rooms
 
-	res.json(await DB.getWhere(Apartment, filter));
+	let tags = ["Brand New", "Balcony"];
+	let result = await DB.getWhere(Apartment, filter);
+	let filtered = [...result];
+
+	for(let r of result) {
+		let t =  r.tags.map(v => v.name)
+		if(!findCommonElements3(tags, t)) {
+			filtered = filtered.filter(i => i !== r);
+		}
+	}
+
+	res.json(filtered);
 });
 
 interface iAd {

@@ -27,6 +27,8 @@ async function makeRandomTagForAd(listing) {
     console.log(t);
     core_1.default.create(tag_1.default, { parent: listing, name: t });
 }
+let buildings = ["Apartment", "Penthouse", "House", "Cottage", "Office"];
+let areas = ["City Center", "Downtown"];
 async function dumpTest() {
     let listing = await core_1.default.create(apartment_1.default, {
         title: "some apartment",
@@ -37,8 +39,8 @@ async function dumpTest() {
         rooms: 5,
         floor: 3,
         size: 100,
-        area: "City Central",
-        buildingtype: "Apartment"
+        area: areas.random(),
+        buildingtype: buildings.random()
     });
     await core_1.default.create(image_1.default, { parent: listing, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/182/182567865.jpg" });
     await core_1.default.create(image_1.default, { parent: listing, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/241/241486183.jpg" });
