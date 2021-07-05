@@ -6,31 +6,37 @@ import GlobalContext from "./Contexts/GlobalContext";
 import Listing from  "./Partials/listing";
 
 function Search() {
-	async function searchAPI() {
+	async function searchAPI(loc) {
+		loc.search = loc.search.substring(1);
+		let q = loc.search.includes("&") ? loc.search.split("&") : [loc.search];
+		console.log(q)
+		let body = {};
+
+		for(let v of q) {
+			let t = v.split("=");
+			body[t[0]] = t[1];
+		}
+		console.log(body)
 		context.setLoading(true);
-		let data = await Post("/api/search", {});
-		context.setLoading(false);
-
-		console.log(data)
-
-		data = data.map((v) => <p>{v.title}</p>);
-		console.log(data)
+		let data = await Post("/api/search", body);
+		if(data.length >= 9) {
+			context.setLoading(false);
+		}
 
 		setApartments(data);
 	}
 
 	let context = useContext(GlobalContext);
 	let [apartments, setApartments] = useState([])
-	//let location = useLocation();
+	let location = useLocation();
 	console.log("wowe");
 
 	useEffect(() => {
-		searchAPI();
+		searchAPI(location);
 	}, []);
 
 	return <>
-		<p>Please render :(</p>
-		{apartments}
+		<div className="pt-3"><Listing list={apartments}/></div>
 	</>;
 }
    

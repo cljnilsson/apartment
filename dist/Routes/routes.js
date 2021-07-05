@@ -22,7 +22,7 @@ server_1.default.get("/api/apartments/catagory/:name", async (req, res) => {
 server_1.default.get("/api/apartments/:id", async (req, res) => {
     res.json(await core_1.default.getFirstWhere(apartment_1.default, { id: req.params.id }));
 });
-function findCommonElements3(arr1, arr2) {
+function findCommonElements(arr1, arr2) {
     return arr1.some(item => arr2.includes(item));
 }
 server_1.default.post("/api/search", async (req, res) => {
@@ -44,13 +44,26 @@ server_1.default.post("/api/search", async (req, res) => {
         delete filter.buildingtype;
     if (!req.body.rooms)
         delete filter.rooms;
-    let tags = ["Brand New", "Balcony"];
+    let tags = [
+        req.body.mountainview ? "Mountain View" : undefined,
+        req.body.communalservicesincluded ? "Communal Services Included" : undefined,
+        req.body.animalsallowed ? "animals Allowed" : undefined,
+        req.body.nearbyparks ? "Nearby Park(s)" : undefined,
+        req.body.balcony ? "Balcony" : undefined,
+        req.body.centralheating ? "Central Heating" : undefined,
+        req.body.lowfloors ? "Low Floors (1-6)" : undefined,
+        req.body.highfloors ? "High Floors (7+)" : undefined,
+        req.body.brandnew ? "Brand New" : undefined
+    ].filter((v) => v !== undefined);
     let result = await core_1.default.getWhere(apartment_1.default, filter);
     let filtered = [...result];
-    for (let r of result) {
-        let t = r.tags.map(v => v.name);
-        if (!findCommonElements3(tags, t)) {
-            filtered = filtered.filter(i => i !== r);
+    console.log(tags);
+    if (tags.length > 0) {
+        for (let r of result) {
+            let t = r.tags.map(v => v.name);
+            if (!findCommonElements(tags, t)) {
+                filtered = filtered.filter(i => i !== r);
+            }
         }
     }
     res.json(filtered);
@@ -83,9 +96,9 @@ server_1.default.post("/createadvertisement", async (req, res) => {
     if (req.body.centralheating)
         core_1.default.create(tag_1.default, { name: "Central Heating", parent: a });
     if (req.body.lowfloors)
-        core_1.default.create(tag_1.default, { name: "Low Floors", parent: a });
+        core_1.default.create(tag_1.default, { name: "Low Floors (1-6)", parent: a });
     if (req.body.highfloors)
-        core_1.default.create(tag_1.default, { name: "High Floors", parent: a });
+        core_1.default.create(tag_1.default, { name: "High Floors (7+)", parent: a });
     if (req.body.brandnew)
         core_1.default.create(tag_1.default, { name: "Brand New", parent: a });
     core_1.default.create(image_1.default, { parent: a, path: "https://q-xx.bstatic.com/images/hotel/max1024x768/241/241486183.jpg" });

@@ -9,13 +9,41 @@ function Index() {
 	const history = useHistory();
 	const params = new URLSearchParams();
 
-	const [minPrice, setMinPrice] 			= useState("");
-	const [maxPrice, setMaxPrice] 			= useState("");
-	const [minSize, setMinSize] 			= useState("");
-	const [maxSize, setMaxSize] 			= useState("");
-	const [area, setArea] 					= useState("");
-	const [buildingType, setbuildingtype] 	= useState("");
-	const [rooms, setRooms] 				= useState("");
+	const [minPrice		, setMinPrice] 		= useState("");
+	const [maxPrice		, setMaxPrice] 		= useState("");
+	const [minSize		, setMinSize] 		= useState("");
+	const [maxSize		, setMaxSize] 		= useState("");
+	const [area			, setArea] 			= useState("");
+	const [buildingType	, setbuildingtype] 	= useState("");
+	const [rooms		, setRooms] 		= useState("");
+
+	const [mountainView		, setMountainView]		= useState("");
+	const [communalService	, setCommunalService]	= useState("");
+	const [animalsAllowed	, setAnimalsAllowed]	= useState("");
+
+	const [nearbyPark		, setNearbyPark]	= useState("");
+	const [balcony			, setBalcony]		= useState("");
+	const [centralHeating	, setCentralHeating]= useState("");
+
+	const [lowFloors		, setLowFloors]		= useState("");
+	const [highFloors		, setHighFloors]	= useState("");
+	const [brandNew			, setBrandNew]		= useState("");
+
+	function checkbox(label : string, callback, extraClasses : string = "") {
+		let name = label.toLowerCase().replace( /\s/g, "");
+		if(name.indexOf("(") > 0) {
+			name = name.substr(0, name.indexOf("("));
+		}
+
+		return(
+			<div className={"form-group col-md-4 " + extraClasses}>
+				<div className="form-check">
+					<input type="checkbox" className="form-check-input" name={name} onChange={event => callback(event.target.checked ? "on" : "")} />
+					<label className="form-check-label">{label}</label>
+				</div>
+			</div>
+		);
+	}
 
 	async function afterSubmission(event) {
 		event.preventDefault();
@@ -24,6 +52,7 @@ function Index() {
 		setMaxPrice(maxPrice === "" ? undefined : maxPrice);
 		setMinSize (minSize  === "" ? undefined : minSize);
 		setMaxSize (maxSize  === "" ? undefined : maxSize);
+		setRooms   (rooms  === "" 	? undefined : rooms);
 
 		setArea			(area 		 === "" 	|| area  		 === "ANY" ? undefined : area);
 		setbuildingtype (buildingType === ""  	|| buildingType  === "ANY" ? undefined : buildingType);
@@ -36,23 +65,23 @@ function Index() {
 		
 		if(area) params.append("area", area);
 
+		if(area) params.append("rooms", rooms);
+
 		if(buildingType)params.append("buildingtype", buildingType);
 
-		history.push("/search?" + params);
-		/*
-		console.log(params.toString())
-
-		let d = await Post("/search", {
-			minPrice: minPrice === "" ? undefined : minPrice,
-			maxPrice: maxPrice === "" ? undefined : maxPrice,
-			minSize : minSize  === "" ? undefined : minSize,
-			maxSize : maxSize  === "" ? undefined : maxSize,
-
-			area		 : area 		=== "" 	|| area  		 === "ANY" ? undefined : area,
-			buildingtype : buildingType === ""  || buildingType  === "ANY" ? undefined : buildingType,
-		});
+		if(mountainView)params.append("mountainview", mountainView);
+		if(communalService)params.append("communalservicesincluded", communalService);
+		if(animalsAllowed)params.append("animalsallowed", animalsAllowed);
 		
-		console.log(d);*/
+		if(nearbyPark)params.append("nearbyPark", nearbyPark);
+		if(balcony)params.append("balcony", balcony);
+		if(centralHeating)params.append("centeralheating", centralHeating);
+		
+		if(lowFloors)params.append("mountainview", lowFloors);
+		if(highFloors)params.append("communalservicesincluded", highFloors);
+		if(brandNew)params.append("animalsallowed", brandNew);
+
+		history.push("/search?" + params);
 	}
 
 	let context = useContext(GlobalContext);
@@ -97,7 +126,7 @@ function Index() {
 						</select>
 					</div>
 					<div className="form-group col-md-4">
-						<input type="text" className="form-control" placeholder="ROOMS" />
+						<input type="number" className="form-control" placeholder="ROOMS" onChange={event => setRooms(event.target.value)} />
 					</div>
 				</div>
 				<div className="form-row align-items-end">
@@ -139,7 +168,24 @@ function Index() {
 						<input type="text" className="form-control" />
 					</div>
 				</div>
-				<button className="btn btn-dark">Search</button>
+				<div className="formSecondary p-3">
+					<div className="form-row align-items-end">
+						{checkbox("Mountain View"	, setMountainView)}
+						{checkbox("Communal Services Included", setCommunalService)}
+						{checkbox("Animals Allowed"	, setAnimalsAllowed)}
+					</div>
+					<div className="form-row align-items-end">
+						{checkbox("Nearby Park(s)"	, setNearbyPark)}
+						{checkbox("Balcony"			, setBalcony)}
+						{checkbox("Central Heating"	, setCentralHeating)}
+					</div>
+					<div className="form-row align-items-end pb-0">
+						{checkbox("Low Floors (1-6)", setLowFloors	,"mb-0")}
+						{checkbox("High Floors (7+)", setHighFloors	,"mb-0")}
+						{checkbox("Brand New"		, setBrandNew	,"mb-0")}
+					</div>
+				</div>
+				<button className="btn btn-dark mt-3">Search</button>
 			</form>
 		</div>);
 	}

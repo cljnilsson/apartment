@@ -32,7 +32,7 @@ interface iSearch {
     rooms?: FindOperator<number>;
 }
 
-function findCommonElements3(arr1, arr2) {
+function findCommonElements(arr1, arr2) {
     return arr1.some(item => arr2.includes(item))
 }
 
@@ -60,14 +60,29 @@ app.post("/api/search", async (req, res) => {
 
 	if(!req.body.rooms) delete filter.rooms
 
-	let tags = ["Brand New", "Balcony"];
+	let tags = [
+		req.body.mountainview 				? "Mountain View" 				: undefined,
+		req.body.communalservicesincluded 	? "Communal Services Included" 	: undefined,
+		req.body.animalsallowed 			? "animals Allowed" 		 	: undefined,
+
+		req.body.nearbyparks 				? "Nearby Park(s)"				: undefined,
+		req.body.balcony 					? "Balcony" 					: undefined,
+		req.body.centralheating 			? "Central Heating" 			: undefined,
+
+		req.body.lowfloors 					? "Low Floors (1-6)" 			: undefined,
+		req.body.highfloors 				? "High Floors (7+)" 			: undefined,
+		req.body.brandnew 					? "Brand New" 		 			: undefined
+	].filter((v) => v !== undefined);
+
 	let result = await DB.getWhere(Apartment, filter);
 	let filtered = [...result];
-
-	for(let r of result) {
-		let t =  r.tags.map(v => v.name)
-		if(!findCommonElements3(tags, t)) {
-			filtered = filtered.filter(i => i !== r);
+	console.log(tags)
+	if(tags.length > 0) {
+		for(let r of result) {
+			let t =  r.tags.map(v => v.name)
+			if(!findCommonElements(tags, t)) {
+				filtered = filtered.filter(i => i !== r);
+			}
 		}
 	}
 
@@ -129,10 +144,10 @@ app.post("/createadvertisement", async (req, res) => {
 		DB.create(Tag, {name: "Central Heating"				, parent: a});
 
 	if(req.body.lowfloors)
-		DB.create(Tag, {name: "Low Floors"					, parent: a});	
+		DB.create(Tag, {name: "Low Floors (1-6)"			, parent: a});	
 
 	if(req.body.highfloors)
-		DB.create(Tag, {name: "High Floors"					, parent: a});	
+		DB.create(Tag, {name: "High Floors (7+)"			, parent: a});	
 
 	if(req.body.brandnew)
 		DB.create(Tag, {name: "Brand New"					, parent: a});	

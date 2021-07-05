@@ -22,24 +22,32 @@ Object.defineProperty(Array.prototype, "chunk", {
 });
 
 interface iProps {
-	cache: string,
-	url: string
+	cache?: string,
+	url?: string,
+	list?: Array<any>
 }
 
 function Listing(props: iProps) {
 	let context = useContext(GlobalContext);
 
 	console.log(context)
+	let allListings;
 
-	const { status, error, data } = Get(props.cache, props.url);
+	if(props.cache && props.url) {
+		const { status, error, data } = Get(props.cache, props.url);
 
-	if (status === "loading") {
-		context.setLoading(true);
-		return <Loading />
+		if (status === "loading") {
+			context.setLoading(true);
+			return <Loading />
+		}
+	
+		if (error) return <span>An error has occurred: {error.message}</span>
+		context.setLoading(false);
+
+		allListings = data;
+	} else {
+		allListings = props.list;
 	}
-
-	if (error) return <span>An error has occurred: {error.message}</span>
-	context.setLoading(false);
 
 	function split(toSplit, chunkSize = 3) {
 		return toSplit.chunk(chunkSize);
@@ -65,7 +73,7 @@ function Listing(props: iProps) {
 	function apartments() {
 		let toReturn = [];
 
-		let arranged = split(data);
+		let arranged = split(allListings);
 
 		for(let r of arranged) {
 			toReturn.push(<div className="row mb-3">{arow(r)}</div>);

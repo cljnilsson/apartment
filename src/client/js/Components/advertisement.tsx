@@ -1,10 +1,9 @@
-import React, { InputHTMLAttributes, useContext, useState } from "react";
-import {Post} from "../Libs/Request";
+import React, { useState } from "react";
 
 import { Editor } from "react-draft-wysiwyg";
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import draftToHtml from 'draftjs-to-html';
+import draftToHtml from "draftjs-to-html";
 
 function Advertisement() {
 	//const { status, error, data } = Get("allapartments", "/api/apartments");
