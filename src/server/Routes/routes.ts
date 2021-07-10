@@ -76,7 +76,7 @@ app.post("/api/search", async (req, res) => {
 
 	let result = await DB.getWhere(Apartment, filter);
 	let filtered = [...result];
-	console.log(tags)
+	
 	if(tags.length > 0) {
 		for(let r of result) {
 			let t =  r.tags.map(v => v.name)

@@ -19,6 +19,8 @@ import "./public/avatar.jpg";
 
 import "./public/loading.svg";
 
+import "./i18nextConf";
+
 let r = <App/>;
 let element = document.getElementById("root");
 

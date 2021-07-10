@@ -57,7 +57,6 @@ server_1.default.post("/api/search", async (req, res) => {
     ].filter((v) => v !== undefined);
     let result = await core_1.default.getWhere(apartment_1.default, filter);
     let filtered = [...result];
-    console.log(tags);
     if (tags.length > 0) {
         for (let r of result) {
             let t = r.tags.map(v => v.name);

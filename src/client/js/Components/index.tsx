@@ -5,9 +5,12 @@ import {Get, Post} from "../Libs/Request";
 import GlobalContext from "./Contexts/GlobalContext";
 import Listing from  "./Partials/listing";
 
+import { useTranslation } from "react-i18next";
+
 function Index() {
 	const history = useHistory();
 	const params = new URLSearchParams();
+	const { t } = useTranslation();
 
 	const [minPrice		, setMinPrice] 		= useState("");
 	const [maxPrice		, setMaxPrice] 		= useState("");
@@ -39,7 +42,7 @@ function Index() {
 			<div className={"form-group col-md-4 " + extraClasses}>
 				<div className="form-check">
 					<input type="checkbox" className="form-check-input" name={name} onChange={event => callback(event.target.checked ? "on" : "")} />
-					<label className="form-check-label">{label}</label>
+					<label className="form-check-label">{t(label)}</label>
 				</div>
 			</div>
 		);
@@ -192,7 +195,7 @@ function Index() {
 
 	return <div>
 		<div id="formbg" className="py-5">{search()}</div>
-		<h3 className="border-bottom text-center py-3">MODERN | COMFORTABLE | SAFE</h3>
+		<h3 className="border-bottom text-center py-3">{t("MODERN | COMFORTABLE | SAFE")}</h3>
 		
 		<div className="pt-3"><Listing cache="allapartments" url="/api/apartments"/></div>
 	</div>;
