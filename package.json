@@ -34,6 +34,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.4",
     "concurrently": "^6.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^4.0.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",

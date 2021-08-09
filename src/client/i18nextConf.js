@@ -10,9 +10,20 @@ const resources = {
 	ru: {
 		translation: {
 			"MODERN | COMFORTABLE | SAFE": "современный | комфортный | безопасный".toUpperCase(),
-			"Mountain View": "вид на горы",
-			"Nearby Park(s)": "Ближайшие парки",
-			"Low Floors (1-6)": "Низкие этажи (1-6)"
+			"Mountain View"		: "Вид на горы",
+			"Nearby Park(s)"	: "Ближайшие парки",
+			"Low Floors (1-6)"	: "Невысокие этажи ( до 6-го) ",
+			"High Floors (7+)"	: "Высокие этажи",
+			"Brand New"			: "Совершенно новая",
+			"Animals Allowed"	: "Можно с животными",
+			"Nearby Park(s)"	: "Ближе к паркам",
+			"Balcony"			: "Терраса и балкон",
+			"ROOMS" 			: "Количество комнат",
+			"Area (sqft)" 		: "Выберите район",
+			"PROPERTY TYPES" 	: "Выберите тип жилья",
+			"Price (USD)" 		: "цена (USD)",
+			"Search"			: "Поиск",
+			"Central Heating" 	: "Центральное отопление"
 		}
 	}
 };

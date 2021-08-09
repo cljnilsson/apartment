@@ -105,7 +105,7 @@ function Index() {
 			<form className="p-3" onSubmit={afterSubmission}>
 				<div className="form-row align-items-end">
 					<div className="form-group col-md-4">
-						<label>PROPERTY TYPES</label>
+						<label>{t("PROPERTY TYPES")}</label>
 						<select className="form-control" onChange={event => setbuildingtype(event.target.value)}>
 							<option selected>ANY</option>
 							<option>Apartment</option>
@@ -117,7 +117,7 @@ function Index() {
 						</select>
 					</div>
 					<div className="form-group col-md-4">
-						<label>Location</label>
+						<label>{t("Location")}</label>
 						<select className="form-control" onChange={event => setArea(event.target.value)}>
 							<option selected>ANY</option>
 							<option>City Center</option>
@@ -129,13 +129,13 @@ function Index() {
 						</select>
 					</div>
 					<div className="form-group col-md-4">
-						<input type="number" className="form-control" placeholder="ROOMS" onChange={event => setRooms(event.target.value)} />
+						<input type="number" className="form-control" placeholder={t("ROOMS")} onChange={event => setRooms(event.target.value)} />
 					</div>
 				</div>
 				<div className="form-row align-items-end">
-				<div className="form-group col-md-2">
+					<div className="form-group col-md-2">
 						<div className="input-group">
-							<label>Price (USD)</label>
+							<label>{t("Price (USD)")}</label>
 							<div className="input-group-prepend">
 								<div className="input-group-text">Min</div>
 							</div>
@@ -152,7 +152,7 @@ function Index() {
 					</div>
 					<div className="form-group col-md-2">
 						<div className="input-group">
-							<label>Area (Sqft)</label>
+							<label>{t("Area (sqft)")}</label>
 							<div className="input-group-prepend">
 								<div className="input-group-text">Min</div>
 							</div>
@@ -188,7 +188,7 @@ function Index() {
 						{checkbox("Brand New"		, setBrandNew	,"mb-0")}
 					</div>
 				</div>
-				<button className="btn btn-dark mt-3">Search</button>
+				<button className="btn btn-dark mt-3">{t("Search")}</button>
 			</form>
 		</div>);
 	}
